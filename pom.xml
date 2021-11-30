@@ -184,7 +184,7 @@
       <dependency>
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
-        <version>30.1.1-jre</version>
+        <version>31.0.1-jre</version>
       </dependency>
       <dependency>
         <groupId>com.squareup.okhttp3</groupId>
@@ -291,7 +291,7 @@
       <dependency>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-core</artifactId>
-        <version>7.15.0</version>
+        <version>8.2.0</version>
       </dependency>
       <dependency>
         <groupId>org.hibernate</groupId>
