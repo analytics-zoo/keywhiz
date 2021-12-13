@@ -112,3 +112,14 @@ contentKeyStore:
 rowHmacCheck: logging
 
 flywaySchemaTable: schema_version
+
+clientAuthConfig:
+  xfcc:
+    - port: 4446
+      allowedClientNames: ["client"]
+      allowedSpiffeIds: []
+  type:
+    useCommonName: true
+    useSpiffeId: false
+  createMissingClients: true
+
