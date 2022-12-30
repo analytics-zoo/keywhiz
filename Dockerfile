@@ -89,7 +89,7 @@ RUN useradd -ms /bin/false keywhiz && \
     chown keywhiz:keywhiz /data && \
     mkdir /secrets && \
     chown keywhiz:keywhiz /secrets && \
-    echo 'alias keywhiz.cli="/usr/src/app/cli/target/keywhiz-cli-*-SNAPSHOT-shaded.jar --devTrustStore"' >> ~/.bashrc && \
+    echo 'alias keywhiz.cli="/usr/src/app/cli/target/keywhiz-cli-*-SNAPSHOT-shaded.jar --devTrustStore --url https://keywhiz-service:4444"' >> ~/.bashrc && \
     echo 'alias key.provider="java -jar server/target/keywhiz-server-*-SNAPSHOT-shaded.jar"' >> ~/.bashrc && \
     echo salt > /usr/src/app/salt
 
