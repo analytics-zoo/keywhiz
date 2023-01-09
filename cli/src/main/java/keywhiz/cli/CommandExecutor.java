@@ -149,7 +149,7 @@ public class CommandExecutor {
       client = new KeywhizClient(mapper, httpClient, url);
       char[] password = null;
       try{
-        password = config.getPassword();
+        password = config.getToken();
 
       } catch (Exception e){
         password = ClientUtils.readPassword(user);

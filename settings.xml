@@ -153,17 +153,17 @@ under the License.
    |-->
   <mirrors>
     <mirror>
-                  <id>ardaNexus</id>
-                  <mirrorOf>*</mirrorOf>
-                  <name>Arda's nexus</name>
-                  <url>http://10.239.45.10:8081/repository/maven-public/</url>
-          </mirror>
-          <mirror>
-                <id>alimaven</id>
-                <name>aliyun maven</name>
+    <id>alimaven</id>
+    <mirrorOf>central</mirrorOf>
+    <name>aliyun maven</name>
+    <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+    </mirror>
+    <mirror>
+        <id>alimaven2</id>
+                <name>aliyun maven2</name>
                 <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
                 <mirrorOf>central</mirrorOf>
-          </mirror>
+    </mirror>
     <!-- mirror
      | Specifies a repository mirror site to use instead of a given repository. The repository that
      | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
@@ -177,6 +177,23 @@ under the License.
     </mirror>
      -->
   </mirrors>
+  <repositories>
+    <repository>
+        <id>oschina</id>
+        <name>oschina</name>
+        <url>http://maven.oschina.net/content/groups/public/</url>
+    </repository>
+    <repository>
+        <id>aliyun</id>
+        <name>aliyun</name>
+        <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+    </repository>
+    <repository>
+        <id>repo1</id>
+        <name>repo1</name>
+        <url>https://repo1.maven.org/maven2/</url>
+    </repository>
+</repositories>
 
   <!-- profiles
    | This is a list of profiles which can be activated in a variety of ways, and which can modify
