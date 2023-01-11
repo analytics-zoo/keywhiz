@@ -50,7 +50,7 @@ public class AddUserCommand extends ConfiguredCommand<KeywhizConfig> {
         .help("User name");
 
     subparser.addArgument("--token")
-        .dest(Args.PASSWORD)
+        .dest(Args.TOKEN)
         .type(String.class)
         .help("User token");
   }
