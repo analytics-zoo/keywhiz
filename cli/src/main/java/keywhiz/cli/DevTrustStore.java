@@ -3,13 +3,14 @@ package keywhiz.cli;
 import com.google.common.io.Resources;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.FileInputStream;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 
 public class DevTrustStore {
-  private static final String store = "dev_and_test_truststore.p12";
+  private static final String store = "/usr/src/app/cli/src/main/resources/dev_and_test_keystore.p12";
   private static final String password = "ponies";
 
   /**
@@ -26,7 +27,7 @@ public class DevTrustStore {
    */
   private static KeyStore keyStoreFromResource(String path, String password) {
     KeyStore keyStore;
-    try (InputStream stream = Resources.getResource(path).openStream()) {
+    try (InputStream stream = new FileInputStream(path)) {
       keyStore = KeyStore.getInstance("PKCS12");
       keyStore.load(stream, password.toCharArray());
     } catch (IOException | NoSuchAlgorithmException | CertificateException | KeyStoreException e) {
@@ -35,3 +36,4 @@ public class DevTrustStore {
     return keyStore;
   }
 }
+
