@@ -23,6 +23,7 @@ import com.google.common.io.ByteStreams;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Random;
 import keywhiz.api.SecretDetailResponse;
 import keywhiz.api.model.Group;
 import keywhiz.cli.configs.AddActionConfig;
@@ -155,15 +156,13 @@ public class AddAction implements Runnable {
   }
 
   private byte[] readSecretContent() {
-    try {
-      byte[] content = ByteStreams.toByteArray(stream);
-      if (content.length == 0) {
-        throw new RuntimeException("Secret content empty!");
-      }
-      return content;
-    } catch (IOException e) {
-      throw Throwables.propagate(e);
+    Random rd = new Random();
+    byte[] content = new byte[128];
+    rd.nextBytes(content);
+    if (content.length == 0) {
+      throw new RuntimeException("Secret content empty!");
     }
+    return content;
   }
 
   private void assignSecret(long secretId, String secretDisplayName) {

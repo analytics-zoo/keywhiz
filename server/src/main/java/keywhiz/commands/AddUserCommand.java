@@ -38,7 +38,7 @@ public class AddUserCommand extends ConfiguredCommand<KeywhizConfig> {
 
   private static final class Args {
     private static final String USER = "user";
-    private static final String PASSWORD = "password";
+    private static final String TOKEN = "token";
   }
 
   @Override public void configure(Subparser subparser) {
@@ -49,10 +49,10 @@ public class AddUserCommand extends ConfiguredCommand<KeywhizConfig> {
         .type(String.class)
         .help("User name");
 
-    subparser.addArgument("--password")
-        .dest(Args.PASSWORD)
+    subparser.addArgument("--token")
+        .dest(Args.TOKEN)
         .type(String.class)
-        .help("User password");
+        .help("User token");
   }
 
   private static String getUser(Namespace namespace) {
@@ -60,16 +60,16 @@ public class AddUserCommand extends ConfiguredCommand<KeywhizConfig> {
     return _user;
   }
 
-  private static String getPassword(Namespace namespace) {
-    String _password = namespace.getString(Args.PASSWORD);
-    return _password;
+  private static String getToken(Namespace namespace) {
+    String _token = namespace.getString(Args.TOKEN);
+    return _token;
   }
 
   @Override protected void run(Bootstrap<KeywhizConfig> bootstrap, Namespace namespace,
                                KeywhizConfig config) throws Exception {
     String user = getUser(namespace);
-    String password = getPassword(namespace);
-    getUserDAO(bootstrap, config).createUser(user, password);
+    String token = getToken(namespace);
+    getUserDAO(bootstrap, config).createUser(user, token);
   }
 
   @VisibleForTesting

@@ -67,7 +67,7 @@ COPY server/pom.xml /usr/src/app/server/
 COPY testing/pom.xml /usr/src/app/testing/
 COPY log/pom.xml /usr/src/app/log/
 RUN rm /usr/share/maven/conf/settings.xml
-COPY s3.xml /usr/share/maven/conf/settings.xml
+COPY settings.xml /usr/share/maven/conf/settings.xml
 RUN export http_proxy=http://child-prc.intel.com:913 && \
 export https_proxy=http://child-prc.intel.com:913 && \
 mvn dependency:copy-dependencies --fail-never
