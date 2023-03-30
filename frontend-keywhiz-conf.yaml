@@ -52,7 +52,7 @@ server:
       port: 8085
 
 logging:
-  appenders: []
+  type: external
 
 ## Use this logging configuration if you want EVERYTHING
 # logging:

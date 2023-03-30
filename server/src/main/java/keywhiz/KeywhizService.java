@@ -85,11 +85,6 @@ public class KeywhizService extends Application<KeywhizConfig> {
   @Override
   protected void bootstrapLogging() {}
 
-  @Override
-  public synchronized LoggingFactory getLoggingFactory() {
-    return new ExternalLoggingFactory();
-  }
-
   private Injector injector;
 
   @SuppressWarnings("unused")
