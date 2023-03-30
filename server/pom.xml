@@ -18,6 +18,19 @@
         <maven.test.skip>true</maven.test.skip>
       </properties>
       <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>sql-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>create-keywhiz-database</id>
+                <!-- This disables database creation -->
+                <phase>none</phase>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
       </build>
     </profile>
     <profile>
