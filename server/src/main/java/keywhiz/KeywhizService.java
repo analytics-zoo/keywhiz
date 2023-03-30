@@ -90,8 +90,6 @@ public class KeywhizService extends Application<KeywhizConfig> {
     return new ExternalLoggingFactory();
   }
 
-  private static final Logger logger = LoggerFactory.getLogger(KeywhizService.class);
-
   private Injector injector;
 
   @SuppressWarnings("unused")
