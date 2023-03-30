@@ -82,6 +82,9 @@ public class KeywhizService extends Application<KeywhizConfig> {
     new KeywhizService().run(args);
   }
 
+  @Override
+  protected void bootstrapLogging() {}
+
   private static final Logger logger = LoggerFactory.getLogger(KeywhizService.class);
 
   private Injector injector;
