@@ -184,7 +184,7 @@ public class KeywhizService extends Application<KeywhizConfig> {
   @VisibleForTesting
   void ensureInjectorCreated(KeywhizConfig config, Environment environment) {
     if (injector == null) {
-      logger.debug("No existing guice injector; creating new one");
+      System.out.println("[Debug] No existing guice injector; creating new one");
       injector = InjectorFactory.createInjector(config, environment);
     }
   }
