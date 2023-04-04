@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 
 public class DevTrustStore {
-  private static final String store = "/usr/src/app/cli/src/main/resources/dev_and_test_keystore.p12";
+  private static final String store = "/usr/src/app/cli/src/main/resources/dev_and_test_truststore.p12";
   private static final String password = "ponies";
 
   /**
