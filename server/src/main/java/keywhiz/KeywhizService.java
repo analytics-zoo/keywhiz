@@ -66,8 +66,7 @@ import keywhiz.service.resources.automation.v2.ClientResource;
 import keywhiz.service.resources.automation.v2.GroupResource;
 import keywhiz.service.resources.automation.v2.SecretResource;
 import org.flywaydb.core.Flyway;
-import io.dropwizard.logging.LoggingFactory;
-import io.dropwizard.logging.ExternalLoggingFactory;
+import io.dropwizard.logging.{LoggingFactory, ExternalLoggingFactory}
 
 /**
  * Starting point for Keywhiz, an implementation of the Dropwizard Service.
