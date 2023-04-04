@@ -66,7 +66,8 @@ import keywhiz.service.resources.automation.v2.ClientResource;
 import keywhiz.service.resources.automation.v2.GroupResource;
 import keywhiz.service.resources.automation.v2.SecretResource;
 import org.flywaydb.core.Flyway;
-import io.dropwizard.logging.{LoggingFactory, ExternalLoggingFactory}
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Starting point for Keywhiz, an implementation of the Dropwizard Service.
@@ -83,11 +84,6 @@ public class KeywhizService extends Application<KeywhizConfig> {
 
   @Override
   protected void bootstrapLogging() {}
-
-  @Override
-  public synchronized LoggingFactory getLoggingFactory() {
-    return new ExternalLoggingFactory();
-  }
 
   private static final Logger logger = LoggerFactory.getLogger(KeywhizService.class);
 
@@ -109,7 +105,7 @@ public class KeywhizService extends Application<KeywhizConfig> {
   @Override public void initialize(Bootstrap<KeywhizConfig> bootstrap) {
     customizeObjectMapper(bootstrap.getObjectMapper());
 
-    System.out.println("[Debug] Registering commands");
+    logger.debug("Registering commands");
     bootstrap.addCommand(new PreviewMigrateCommand());
     bootstrap.addCommand(new MigrateCommand());
     bootstrap.addCommand(new DbSeedCommand());
@@ -124,7 +120,7 @@ public class KeywhizService extends Application<KeywhizConfig> {
     try {
       doRun(config, environment);
     } catch (Exception e) {
-      System.out.println("[Error] " + e.getMessage());
+      logger.error(e.getMessage(), e);
       throw e;
     }
   }
@@ -134,23 +130,23 @@ public class KeywhizService extends Application<KeywhizConfig> {
 
     JerseyEnvironment jersey = environment.jersey();
 
-    System.out.println("[Debug] Registering resource filters");
+    logger.debug("Registering resource filters");
     jersey.register(injector.getInstance(ClientCertificateFilter.class));
 
-    System.out.println("[Debug] Registering servlet filters");
+    logger.debug("Registering servlet filters");
     environment.servlets().addFilter("security-headers-filter", injector.getInstance(SecurityHeadersFilter.class))
         .addMappingForUrlPatterns(null, /* Default is for requests */
             false /* Can be after other filters */, "/*" /* Every request */);
     jersey.register(injector.getInstance(CookieRenewingFilter.class));
 
-    System.out.println("[Debug] Registering providers");
+    logger.debug("Registering providers");
     jersey.register(new AuthResolver.Binder(injector.getInstance(ClientAuthFactory.class),
         injector.getInstance(AutomationClientAuthFactory.class),
         injector.getInstance(UserAuthFactory.class)));
 
     jersey.register(injector.getInstance(PermissionCheck.class));
 
-    System.out.println("[Debug] Registering resources");
+    logger.debug("Registering resources");
     jersey.register(injector.getInstance(BackfillRowHmacResource.class));
     jersey.register(injector.getInstance(ClientResource.class));
     jersey.register(injector.getInstance(ClientsResource.class));
@@ -179,7 +175,7 @@ public class KeywhizService extends Application<KeywhizConfig> {
 
     validateDatabase(config);
 
-    System.out.println("[Debug] Keywhiz configuration complete");
+    logger.debug("Keywhiz configuration complete");
   }
 
   @VisibleForTesting
@@ -191,7 +187,7 @@ public class KeywhizService extends Application<KeywhizConfig> {
   }
 
   private void validateDatabase(KeywhizConfig config) {
-    System.out.println("[Debug] Validating database state");
+    logger.debug("Validating database state");
     DataSource dataSource = config.getDataSourceFactory()
         .build(new MetricRegistry(), "flyway-validation-datasource");
     Flyway flyway = Flyway.configure().dataSource(dataSource).locations(config.getMigrationsDir()).table(config.getFlywaySchemaTable()).load();
