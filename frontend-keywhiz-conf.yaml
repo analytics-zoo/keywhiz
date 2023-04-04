@@ -52,7 +52,9 @@ server:
       port: 8085
 
 logging:
-  appenders: []
+  appenders:
+    - type: console
+      threshold: ALL
 
 ## Use this logging configuration if you want EVERYTHING
 # logging:
